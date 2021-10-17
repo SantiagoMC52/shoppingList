@@ -12,6 +12,8 @@ const App = () => {
     {id: 4, text: 'Juice'},
   ])
 
+  const [edit, setEdit] = useState(null);
+
   const deleteItem = (id) => {
     setItems(prevItems => {
       return prevItems.filter(item => item.id !== id)
@@ -20,8 +22,12 @@ const App = () => {
 
   const addItem = (text) => {
     setItems(prevItems => {
-      return [{id: (Math.random() * 100 - 5) + 5, text}, ...prevItems]
+      return [{id: Math.round(Math.random() * 100 - 5) + 5, text}, ...prevItems]
     })
+  }
+
+  const editItem = () => {
+    
   }
 
   return (
@@ -30,7 +36,12 @@ const App = () => {
       <AddItem addItem={addItem}/>
       <FlatList 
         data={items} 
-        renderItem={({item}) => <ListItem item={item} deleteItem={deleteItem}/>}
+        renderItem={({item}) => 
+        <ListItem 
+          item={item} 
+          deleteItem={deleteItem}
+          editItem={editItem}
+        />}
       />
     </View>
   );

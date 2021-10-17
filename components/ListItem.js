@@ -8,11 +8,17 @@ const ListItem = ({item, deleteItem}) => {
     <TouchableOpacity style={styles.listItem}>
       <View style={styles.listItemView}>
         <Text style={styles.listItemText}>{item.text}</Text>
-        <Icon 
-            name='remove' 
-            size={20} color='firebrick' 
-            onPress={() => deleteItem(item.id)}
-        />
+        <View style={styles.listItemIcons}>
+          <Icon 
+              name='edit' 
+              size={25} color='black' 
+          />
+          <Icon 
+              name='remove' 
+              size={25} color='firebrick' 
+              onPress={() => deleteItem(item.id)}
+          />
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -33,7 +39,12 @@ const styles = StyleSheet.create({
     listItemText: {
         fontSize: 18,
         fontWeight: 'bold',
-    },  
+    },
+    listItemIcons: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      width: 80,
+    },
 })
 
 export default ListItem;
