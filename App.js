@@ -6,13 +6,11 @@ import AddItem from './components/AddItem';
 
 const App = () => {
   const [items, setItems] = useState([
-    {id: 1, text: 'Milk'},
-    {id: 2, text: 'Eggs'},
-    {id: 3, text: 'Bread'},
-    {id: 4, text: 'Juice'},
+    {id: 1, text: 'Milk', done: false},
+    {id: 2, text: 'Eggs', done: false},
+    {id: 3, text: 'Bread', done: false},
+    {id: 4, text: 'Juice', done: false},
   ])
-
-  const [edit, setEdit] = useState(null);
 
   const deleteItem = (id) => {
     setItems(prevItems => {
@@ -26,8 +24,10 @@ const App = () => {
     })
   }
 
-  const editItem = () => {
-    
+  const markAsDone = (id) => {
+    setItems(items.map((item) => (
+      item.id === id ? {...item, done: !item.done} : item
+    )))
   }
 
   return (
@@ -40,7 +40,7 @@ const App = () => {
         <ListItem 
           item={item} 
           deleteItem={deleteItem}
-          editItem={editItem}
+          markAsDone={markAsDone}
         />}
       />
     </View>

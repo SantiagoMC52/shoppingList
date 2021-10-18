@@ -1,17 +1,28 @@
+import { Linter } from 'eslint';
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 
-const ListItem = ({item, deleteItem}) => {
+const ListItem = ({item, deleteItem, markAsDone}) => {
+
+  const styleText = {
+    decoration: {
+      textDecorationLine: !item.done ? 'none' : 'line-through',
+    },
+    listItemText: {
+      fontSize: 18,
+      fontWeight: 'bold',
+  },
+  }
 
   return (
-    <TouchableOpacity style={styles.listItem}>
-      <View style={styles.listItemView}>
-        <Text style={styles.listItemText}>{item.text}</Text>
+    <TouchableOpacity style={styles.listItem} onLongPress={() => markAsDone(item.id)}>
+      <View style={styles.listItemView}> 
+        <Text style={{...styleText.listItemText, ...styleText.decoration}}>{item.text}</Text>
         <View style={styles.listItemIcons}>
           <Icon 
               name='edit' 
-              size={25} color='black' 
+              size={25} color='black'
           />
           <Icon 
               name='remove' 
@@ -35,10 +46,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-    },
-    listItemText: {
-        fontSize: 18,
-        fontWeight: 'bold',
     },
     listItemIcons: {
       flexDirection: 'row',
