@@ -19,9 +19,19 @@ const App = () => {
   }
 
   const addItem = (text) => {
-    setItems(prevItems => {
-      return [{id: Math.round(Math.random() * 100 - 5) + 5, text}, ...prevItems]
-    })
+    if(!text){
+      Alert.alert(
+        "Error",
+        "Ooops! You must write an item",
+        [
+          { text: "OK", onPress: () => console.log("OK Pressed") }
+        ]
+      );
+    }else{
+      setItems(prevItems => {
+        return [{id: Math.round(Math.random() * 100 - 5) + 5, text}, ...prevItems]
+      })
+    }
   }
 
   const markAsDone = (id) => {
