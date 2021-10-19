@@ -6,10 +6,10 @@ import AddItem from './components/AddItem';
 
 const App = () => {
   const [items, setItems] = useState([
-    {id: 1, text: 'Milk'},
-    {id: 2, text: 'Eggs'},
-    {id: 3, text: 'Bread'},
-    {id: 4, text: 'Juice'},
+    {id: 1, text: 'Milk', done: false},
+    {id: 2, text: 'Eggs', done: false},
+    {id: 3, text: 'Bread', done: false},
+    {id: 4, text: 'Juice', done: false},
   ])
 
   const deleteItem = (id) => {
@@ -19,9 +19,25 @@ const App = () => {
   }
 
   const addItem = (text) => {
-    setItems(prevItems => {
-      return [{id: (Math.random() * 100 - 5) + 5, text}, ...prevItems]
-    })
+    if(!text){
+      Alert.alert(
+        "Error",
+        "Ooops! You must write an item",
+        [
+          { text: "OK", onPress: () => console.log("OK Pressed") }
+        ]
+      );
+    }else{
+      setItems(prevItems => {
+        return [{id: Math.round(Math.random() * 100 - 5) + 5, text}, ...prevItems]
+      })
+    }
+  }
+
+  const markAsDone = (id) => {
+    setItems(items.map((item) => (
+      item.id === id ? {...item, done: !item.done} : item
+    )))
   }
 
   return (
@@ -30,7 +46,13 @@ const App = () => {
       <AddItem addItem={addItem}/>
       <FlatList 
         data={items} 
-        renderItem={({item}) => <ListItem item={item} deleteItem={deleteItem}/>}
+        renderItem={({item}) => 
+        <ListItem 
+          item={item} 
+          deleteItem={deleteItem}
+          markAsDone={markAsDone}
+          items={items}
+        />}
       />
     </View>
   );
