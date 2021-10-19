@@ -51,6 +51,7 @@ const App = () => {
           item={item} 
           deleteItem={deleteItem}
           markAsDone={markAsDone}
+          items={items}
         />}
       />
     </View>
