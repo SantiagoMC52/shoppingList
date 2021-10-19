@@ -10,3 +10,5 @@
 * Start the app opening two terminals.
   * In one terminal run the command `npm start` and in the other run the command `npm run adroid`
 * You also can start the app by using only `npm run android`
+
+![shopping list](./assets/shopping-list.PNG);
