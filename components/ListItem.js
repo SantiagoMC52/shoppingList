@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 
-const ListItem = ({item, deleteItem, markAsDone, items}) => {
+const ListItem = ({item, deleteItem, markAsDone}) => {
 
   const [editing, setEditing] = useState(null);
   const [editingText, setEditingText] = useState('');
@@ -10,12 +10,7 @@ const ListItem = ({item, deleteItem, markAsDone, items}) => {
   const onChange = (textValue) =>  setEditingText(textValue);
 
   const editText = (id) => {
-     items?.map((item) => {
-      if(item.id === id){
-        item.text = editingText
-      }
-      return items;
-    })
+    item.id === id ? item.text = editingText : item.text;
     setEditing(null);
     setEditingText('');
   }
